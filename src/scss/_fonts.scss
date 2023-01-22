@@ -1,0 +1,24 @@
+$font-family-regular: 'PoppinsRegular', sans-serif;
+$font-family-medium: 'PoppinsMedium', sans-serif;
+$font-family-semi-bold: 'PoppinsSemiBold', sans-serif;
+$font-family-bold: 'PoppinsBold', sans-serif;
+$font-size-xs: 10px;
+$font-size-ss: 12px;
+$font-size-sm: 14px;
+$font-size-sx: 15px;
+$font-size-mm: 18px;
+$font-size-mx: 20px;
+$font-size-ls: 25px;
+$font-size-lx: 30px;
+
+$font-size-sup: 5px;
+
+$line-height-l: $font-size-lx; //30
+$line-height-m: $font-size-ls; //25
+$line-height-mx: $font-size-mx; //20
+$line-height-ss: $font-size-mm; //18
+$line-height-sl: $font-size-sx; //15
+$line-height-sm: $font-size-sm; //14
+$line-height-xs: $font-size-xs; //10
+
+$base-font-size: $font-size-sm;

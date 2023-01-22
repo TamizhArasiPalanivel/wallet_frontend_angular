@@ -1,0 +1,101 @@
+@import "../../scss/_variables.scss";
+@import "../../scss/_fonts.scss";
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}
+
+table,
+th,
+td {
+    border-bottom: 1px solid grey;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.newWallet {
+    font-size: 20px;
+    color: black;
+    margin-top: 80px;
+}
+
+.form-div {
+    width: 300px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white;
+    width: 40%;
+    height: 100%;
+    z-index: 1;
+}
+
+.form-wallet {
+    padding: 95px 75px;
+}
+
+input {
+    margin: 20px 0px;
+    border: 0;
+    outline: 0;
+    padding: 5px;
+    border-bottom: 1px solid grey;
+    width: 55%;
+}
+
+input:focus {
+    outline: none !important;
+}
+
+.new-button {
+    margin: 20px 0px;
+    float: right;
+    margin-bottom: 30px;
+}
+
+.input_cancel {
+    padding: 0% !important;
+    width: 20% !important;
+    ;
+}
+
+.input_submit {
+    float: right !important;
+    ;
+}
+
+.form-button {
+    margin-top: 20px;
+}
+
+.button-row {
+    display: block;
+    position: relative;
+    &-button {
+        background-color: $medium-slate-blue;
+        border-radius: 4px;
+        border: none;
+        color: $white;
+        font-size: $font-size-sx;
+        font-family: $font-family-regular;
+        // width: 15%;
+        height: 45px;
+        text-align: center;
+        padding: 10px;
+        line-height: 20px;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,71 @@
+<div>
+    <div class="button-row">
+        <button class="button-row-button new-button" (click)="showWalletForm()">{{buttonLabel}}</button>
+    </div>
+    <div>
+        <table>
+            <th>
+                Wallet id
+            </th>
+            <th>
+                Wallet name
+            </th>
+            <th>
+                Wallet balance
+            </th>
+            <th>
+                Wallet created date
+            </th>
+            <th>
+                Add/Show transactions
+            </th>
+            <tr *ngFor="let wallet of wallets | paginate
+            : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                id: 'first'
+              }">
+                <td>{{wallet.id}}</td>
+                <td>{{wallet.name}}</td>
+                <td>{{wallet.balance}}</td>
+                <td>{{wallet.date | date:'dd-MM-yyyy hh:mm:ss'}}</td>
+                <td>
+                    <div class="button-row">
+                        <button class="button-row-button" (click)="routeToTransactions(wallet)">Add/Show
+                            Transactions</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <pagination-controls id="first" (pageChange)="page = $event" (pageBoundsCorrection)="page = $event"
+        previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page"></pagination-controls>
+</div>
+<div class="form-div" *ngIf="displayWalletForm">
+    <div class="form-wallet">
+        Add new wallet
+        <br /><br />
+        Wallet id will be generated dynamically
+        <br /><br />
+        Provide wallet name and wallet opening balance.
+        <br />
+        <br />
+        <br />
+        <form [formGroup]="formdata" (ngSubmit)="createWallet(formdata.value)">
+
+            <label>Wallet name</label>
+            <br />
+            <input autofocus type="text" name="name" placeholder="ABC" formControlName="name">
+            <br />
+            <label>Wallet balance</label>
+            <br />
+            <input type="number" name="balance" placeholder="2000" formControlName="balance">
+            <div class="button-row form-button">
+                <input type="cancel" class="button-row-button input_cancel" value="Cancel"
+                    (click)="displayWalletForm = false">
+                <input type="submit" class="button-row-button input_submit" value="Save">
+            </div>
+        </form>
+    </div>
+</div>

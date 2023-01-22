@@ -1,0 +1,75 @@
+<div>
+    <div class="button-row">
+        <button class="button-row-button new-button" (click)="showTransationForm()">Add Transaction</button>
+        <button class="button-row-button new-button" (click)="exportTransactions()">Export Transactions</button>
+    </div>
+    <div>
+        <table>
+            <th>
+                Tran. amount
+            </th>
+            <th>
+                Tran. description
+            </th>
+            <th>
+                Tran. type
+            </th>
+            <th>
+                Tran. date
+            </th>
+            <th>
+                Wallet balance
+            </th>
+            <tr *ngFor="let tran of transaction | paginate
+            : {
+                itemsPerPage: tableSize,
+                currentPage: page
+              }">
+                <td>{{tran.amount}}</td>
+                <td>{{tran.description}}</td>
+                <td>{{tran.type}}</td>
+                <td>{{tran.date | date:'dd-MM-yyyy hh:mm:ss'}}</td>
+                <td>{{tran.balance}}</td>
+            </tr>
+            <tr> <td  class="td-no-records-found" colspan="5" *ngIf = "transaction.length == 0"> No records found, click on Add Transactions to add a transaction</td></tr>
+        </table>
+        <pagination-controls *ngIf = "transaction.length > 0" (click)="callthis($event)" (pageChange)="page = $event"></pagination-controls>
+    </div>
+    <div>
+
+    </div>
+</div>
+<div class="form-div" *ngIf="displayTransactionForm">
+    <div class="form-wallet">
+        Add new transaction
+        <br /><br />
+        Transaction id will be generated dynamically
+        <br /><br />
+        Provide transaction amount and transaction description
+        <br />
+        <br />
+        <br />
+        <form [formGroup]="formdata" (ngSubmit)="addTransaction(formdata.value)">
+            <label>Transaction amount</label>
+            <br />
+            <input type="text" number="amount" placeholder="200" formControlName="amount">
+            <br />
+            <label>Description</label>
+            <br />
+            <input type="text" name="description" placeholder="Travel expense" formControlName="description">
+            <br />
+            <label>Select transation type</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <div class="button-row form-button">
+                <input type="cancel" class="button-row-button input_cancel" value="Cancel" (click)="displayTransactionForm = false">
+                <input type="submit" class="button-row-button input_submit" value="Save">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="button-row">
+    <button class="button-row-button new-button" (click)="backToWallet()">Back</button>
+</div>

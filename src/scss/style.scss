@@ -1,0 +1,1477 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "./variables.scss";
+@import "./fonts.scss";
+
+button:focus,
+.btn:focus {
+    outline: none;
+    box-shadow: inherit;
+}
+
+.main {
+    &-wrap {
+        background-color: $white;
+        @include display-flex;
+        @include flex-wrap(wrap);
+        max-width: 1366px;
+        margin: 0 auto;
+    }
+
+    &-content {
+        padding-left: 70px;
+        width: 100%;
+        position: relative;
+        left: 0;
+        transition: padding-left 0.2s ease;
+
+        &.is-overview {
+            padding-left: 340px;
+        }
+
+        &.is-expand {
+            padding-left: 70px;
+        }
+
+        &:before {
+            content: "";
+            background-color: $light-slate-blue-c;
+            @include position(absolute, 0, null, null, 70px);
+            @include width-height(40px, 70px);
+        }
+    }
+}
+
+.title-row {
+    text-align: center;
+
+    .tag {
+        color: $regalBlue;
+        font-size: $font-size-sx;
+        text-transform: uppercase;
+    }
+
+    &.no-tag {
+        border-bottom: none;
+        position: relative;
+        margin-bottom: 25px;
+
+        h2 {
+            display: inline-block;
+            background-color: $white;
+            padding: 3px 15px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        &:before {
+            background-color: $border-color;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 55%;
+            @include width-height(100%, 1px);
+            @include transform(translate(0%, -50%));
+        }
+    }
+}
+
+.scroll-bar {
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1;
+    padding-right: 5px;
+
+    &::-webkit-scrollbar-track {
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 3px;
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        height: 10px;
+        background-color: $echo-blue;
+    }
+
+    &.white {
+        &::-webkit-scrollbar-thumb {
+            background-color: $white !important;
+        }
+    }
+}
+
+.hr-scroll {
+    white-space: nowrap;
+    overflow: auto;
+
+    &::-webkit-scrollbar-track {
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 3px;
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        height: 10px;
+        background-color: $echo-blue;
+    }
+}
+
+.pie-chart {
+    transform: translate(30px, 30px) !important;
+}
+
+
+.doughnut-chart {
+    .pie-chart {
+        transform: translate(100px, 100px) !important;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.progress {
+    background-color: transparent;
+    @include border-radius(0);
+    @include width-height(100%, 5px);
+    @include display-flex;
+    @include position(absolute, null, null, -1px, 0);
+    line-height: 0;
+    overflow: inherit;
+
+    &:before {
+        @include position(absolute, null, null, 0, 0);
+        @include width-height(100%, 0px);
+        content: "";
+        background-color: $quartz;
+    }
+
+    &-bar {
+        height: 5px;
+
+        &.nrpc {
+            background-color: $torchRed;
+        }
+
+        &.rpc {
+            background-color: $green;
+        }
+
+        &.not {
+            background-color: $quartz;
+            color: $black;
+        }
+
+        &.hold {
+            background-color: $cardHoverBg;
+        }
+
+        &.dss {
+            background-color: $productName;
+        }
+    }
+
+    .tool-tip {
+        @include position(absolute, null, null, 30px, 15px);
+        background-color: $cardHoverBg;
+        @include border-radius(10px);
+        box-shadow: 0 4px 12px 0 $campaignCard-hover-boxShadow;
+        padding: 10px 10px 3px;
+        font-size: $font-size-ss - 3;
+        width: max-content;
+        z-index: 3;
+        transition: all 0.3s ease;
+        @include opacity-visibility(0, hidden);
+
+        &:before {
+            @include position(absolute, null, null, -5px, 23px);
+            content: "";
+            @include width-height(0, 0);
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid $cardHoverBg;
+        }
+
+        span {
+            color: $white;
+            display: inline-block;
+            padding-right: 5px;
+            padding-bottom: 5px;
+            margin: 0 -1px;
+
+            dl {
+                margin-right: 5px;
+                padding: 3px 5px;
+                display: inline-block;
+                border-bottom-left-radius: 8px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                background-color: $portage;
+                color: $white;
+                line-height: $font-size-ss - 1;
+
+                &.nrpc {
+                    background-color: $torchRed;
+                }
+
+                &.rpc {
+                    background-color: $green;
+                }
+
+                &.not {
+                    background-color: $quartz;
+                    color: $black;
+                }
+
+                &.dss {
+                    background-color: $productName;
+                }
+            }
+        }
+
+        .metrics {
+            color: $white;
+            display: inline-block;
+            padding: 5px 10px 10px 10px;
+            font-size: $base-font-size;
+
+            span {
+                padding: 5px;
+
+                &:first-child {
+                    font-size: calc($base-font-size + 2px);
+                    font-family: $font-family-bold;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        .tool-tip {
+            bottom: 12px;
+            @include opacity-visibility(1, visible);
+        }
+    }
+
+    &.only {
+        margin-bottom: 0;
+    }
+}
+
+bs-datepicker-inline-container {
+    display: block !important;
+}
+
+.bs-datepicker-container {
+    width: 100%;
+    padding: 0;
+}
+
+.bs-datepicker {
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+    border: solid 1px $quartz;
+    @include border-radius(4px);
+
+    &.theme-inline {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+        @include border-radius(0px);
+    }
+}
+
+.bs-datepicker-head {
+    button {
+        &:hover {
+            background-color: transparent;
+        }
+    }
+}
+
+.theme-green,
+.theme-red,
+.theme-blue,
+.theme-inline {
+    position: relative;
+
+    .bs-datepicker-head {
+        background-color: transparent;
+        padding: 10px 0 0;
+        text-align: center;
+        height: 40px;
+
+        .current {
+            color: $black;
+            font-family: $font-family-semi-bold;
+            padding: 0;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+
+    .bs-datepicker-body {
+        border: none;
+        padding: 5px;
+
+        table {
+            th {
+                border-bottom: none;
+                font-size: $font-size-xs;
+                font-family: $font-family-semi-bold;
+                text-transform: uppercase;
+                color: $black;
+            }
+
+            td {
+                color: $suva-grey;
+                font-size: $font-size-xs + 1;
+                font-family: $font-family-regular;
+            }
+
+            .disabled {
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+.theme-red,
+.theme-blue,
+.theme-inline {
+    .bs-datepicker-head {
+
+        .previous,
+        .next {
+            background-color: $hoverBg;
+            border-radius: 4px;
+            position: absolute;
+            top: 15px;
+
+            span {
+                font-family: $font-family-regular;
+                font-size: 29px;
+            }
+
+            &:disabled {
+                opacity: 0;
+            }
+        }
+
+        .previous {
+            left: 15px;
+        }
+
+        .next {
+            right: 15px;
+        }
+    }
+
+    .bs-datepicker-body {
+        table {
+            td {
+                span {
+                    &.selected {
+                        background-color: $hoverBg;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.theme-red {
+    @include position(relative, -132px, 555px, null, null);
+    z-index: 3;
+}
+
+.theme-green {
+    &::before {
+        content: "";
+        @include width-height(100%, 100%);
+        @include position(absolute, 0, null, null, 0);
+        z-index: 3;
+    }
+
+    .bs-datepicker-head {
+
+        .previous,
+        .next {
+            display: none;
+        }
+    }
+
+    .bs-datepicker-body {
+        table {
+            td {
+                span {
+                    &.selected {
+                        background-color: transparent;
+                        color: $suva-grey;
+                    }
+                }
+            }
+        }
+    }
+
+    .is-other-month {
+        display: none !important;
+    }
+}
+
+.icon {
+
+    &-paid,
+    &-arrange,
+    &-arrange-future,
+    &-promise,
+    &-call,
+    &-hold,
+    &-unsuccess,
+    &-callBackLater,
+    &-sms,
+    &-exception,
+    &-exception-fi,
+    &-letter,
+    // [ID-28663, ID-27920] - (Execute MDD, Schedule MDD Icon Issue) - (09-08-2022)
+    &-executeDDE,
+    &-scheduleDDE,
+    &-hardship,
+    &-dss,
+    &-litigation,
+    &-complaints,
+    &-voicemail,
+    &-freeze,
+    &-unfreeze,
+    &-reopen-account,
+    &-close-account,
+    &-skip-trace,
+    &-invalidlead,
+    &-leadContactedNotCustomer,
+    &-debt-adjustment,
+    &-allocate,
+    &-record,
+    &-reverse,
+    &-adhoc,
+    &-nextAction,
+    &-lmtc,
+    &-bulk,
+    &-tag-account,
+    &-caveat,
+    &-repossessed,
+    &-manual-letter,
+    &-meeting-request,
+    &-repossession,
+    &-collection-status,
+    &-penalty-waiver,
+    &-no-outcome,
+    &-edit-address,
+    &-edit-customer-email,
+    &-edit-contact,
+    &-edit-identity,
+    &-notes,
+    &-flow,
+    &-field-visit-enable,
+    &-field-visit-disable,
+    &-collateral,
+    &-restructure,
+    &-default {
+        background-color: $blue;
+        position: relative;
+
+        &:after {
+            content: "";
+            @include position(absolute, -5px, -8px, null, null);
+            @include width-height(20px, 20px);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right center;
+            z-index: 3;
+        }
+    }
+
+
+
+    &-paid {
+        &:after {
+            background-image: url("../assets/images/action-taken/paid.svg") !important;
+        }
+    }
+
+    &-restructure {
+        &:after {
+            background-image: url("../assets/images/action-taken/restructure-calendar.svg") !important;
+        }
+    }
+
+    &-manual-letter {
+        &:after {
+            background-image: url("../assets/images/action-taken/letter-action-cal.svg") !important;
+        }
+    }
+
+    &-arrange {
+        &:after {
+            background-image: url("../assets/images/action-taken/arrangment.svg") !important;
+        }
+    }
+
+    &-arrange-future {
+        &:after {
+            background-image: url("../assets/images/action-taken/arrangement-future.svg") !important;
+        }
+    }
+
+    &-no-outcome {
+        &:after {
+            background-image: url("../assets/images/action-taken/contact_no_outcome.svg") !important;
+        }
+    }
+
+    &-promise {
+        &:after {
+            background-image: url("../assets/images/action-taken/promise-to-pay.svg") !important;
+        }
+    }
+
+    &-hold {
+        &:after {
+            background-image: url("../assets/images/action-taken/hold.svg") !important;
+        }
+    }
+
+    &-field-visit-enable {
+        &:after {
+            background-image: url("../assets/images/action-taken/icon-field-visit-enable.svg") !important;
+        }
+    }
+
+    &-field-visit-disable {
+        &:after {
+            background-image: url("../assets/images/action-taken/icon-field-visit-disable.svg") !important;
+        }
+    }
+
+    &-flow {
+        &:after {
+            background-image: url("../assets/images/action-taken/icon-flow.svg") !important;
+        }
+    }
+
+
+    &-missed {
+        &:after {
+            background-image: url("../assets/images/action-taken/missed-payment.svg") !important;
+        }
+    }
+
+    &-unsuccess {
+        &:after {
+            background-image: url("../assets/images/action-taken/missed-call.svg") !important;
+        }
+    }
+
+    &-emi {
+        &:after {
+            background-image: url("../assets/images/action-taken/emi.svg") !important;
+        }
+    }
+
+    &-call {
+        &:after {
+            background-image: url("../assets/images/action-taken/call.svg") !important;
+        }
+    }
+
+    &-callBackLater {
+        &:after {
+            background-image: url("../assets/images/action-taken/call-back-later.svg") !important;
+        }
+    }
+
+    &-sms {
+        &:after {
+            background-image: url("../assets/images/action-taken/sms.svg") !important;
+        }
+    }
+
+    &-exception,
+    &-exception-fi {
+        &:after {
+            background-image: url("../assets/images/action-taken/exception.svg") !important;
+        }
+    }
+
+    &-letter {
+        &:after {
+            background-image: url("../assets/images/action-taken/email-action.svg") !important;
+        }
+    }
+
+    // [ID-28663, ID-27920] - (Execute MDD, Schedule MDD Icon Issue) - (09-08-2022)
+    &-scheduleDDE {
+        &:after {
+            background-image: url("../assets/images/action-taken/mdd.svg") !important;
+        }
+    }
+
+    // [ID-28663, ID-27920] - (Execute MDD, Schedule MDD Icon Issue) - (09-08-2022)
+    &-executeDDE {
+        &:after {
+            background-image: url("../assets/images/action-taken/emdd.svg") !important;
+        }
+    }
+
+    &-hardship {
+        &:after {
+            background-image: url("../assets/images/action-taken/hardship.svg") !important;
+        }
+    }
+
+    &-dss {
+        &:after {
+            background-image: url("../assets/images/action-taken/dss.svg") !important;
+        }
+    }
+
+    &-litigation {
+        &:after {
+            background-image: url("../assets/images/action-taken/litigation.svg") !important;
+        }
+    }
+
+    &-complaints {
+        &:after {
+            background-image: url("../assets/images/action-taken/complaints.svg") !important;
+        }
+    }
+
+    &-voicemail {
+        &:after {
+            background-image: url("../assets/images/action-taken/voicemail.svg") !important;
+        }
+    }
+
+    &-lmtc {
+        &:after {
+            background-image: url("../assets/images/action-taken/lmtc.svg") !important;
+        }
+    }
+
+    &-freeze {
+        &:after {
+            background-image: url("../assets/images/action-taken/unfreeze.svg") !important;
+        }
+    }
+
+    &-unfreeze {
+        &:after {
+            background-image: url("../assets/images/action-taken/freeze.svg") !important;
+        }
+    }
+
+    &-invalidlead {
+        &:after {
+            background-image: url("../assets/images/action-taken/invalid-lead.svg") !important;
+        }
+    }
+
+    &-leadContactedNotCustomer {
+        &:after {
+            background-image: url("../assets/images/action-taken/lead-contacted-not-customer.svg") !important;
+        }
+    }
+
+    &-close-account {
+        &:after {
+            background-image: url("../assets/images/action-taken/close-account.svg") !important;
+        }
+    }
+
+    &-reopen-account {
+        &:after {
+            background-image: url("../assets/images/action-taken/reopen-account.svg") !important;
+        }
+    }
+
+    &-skip-trace {
+        &:after {
+            background-image: url("../assets/images/action-form/skip.png") !important;
+        }
+    }
+
+    &-debt-adjustment {
+        &:after {
+            background-image: url("../assets/images/action-taken/debt-adjustment.svg") !important;
+        }
+    }
+
+    &-allocate {
+        &:after {
+            background-image: url("../assets/images/action-taken/allocate.svg") !important;
+        }
+    }
+
+    &-record {
+        &:after {
+            background-image: url("../assets/images/action-taken/record.svg") !important;
+        }
+    }
+
+    &-reverse {
+        &:after {
+            background-image: url("../assets/images/action-taken/reverse.svg") !important;
+        }
+    }
+
+    &-adhoc {
+        &:after {
+            background-image: url("../assets/images/action-taken/adhoc.svg") !important;
+        }
+    }
+
+    &-nextAction {
+        &:after {
+            background-image: url("../assets/images/action-taken/next-action.svg") !important;
+        }
+    }
+
+    &-notes {
+        &:after {
+            background-image: url("../assets/images/action-taken/notes.svg") !important;
+        }
+    }
+
+    &-bulk {
+        &:after {
+            background-image: url("../assets/images/action-taken/bulk-communication.svg") !important;
+        }
+    }
+
+    &-tag-account {
+        &:after {
+            background-image: url("../assets/images/action-taken/tag-account.svg") !important;
+        }
+    }
+
+    &-collateral {
+        &:after {
+            background-image: url("../assets/images/action-taken/collateralAction.svg") !important;
+        }
+    }
+
+    // [YOMA] - (ID-652) - (Reposession Icon in calendar) - (03-08-2022)
+    &-repossessed {
+        &:after {
+            background-image: url("../assets/images/action-taken/reposession.svg") !important;
+        }
+    }
+
+    &-meeting-request {
+        &:after {
+            background-image: url("../assets/images/action-taken/meeting-request.svg") !important;
+        }
+    }
+
+    &-repossession {
+        &:after {
+            background-image: url("../assets/images/action-taken/repossession-action.svg") !important;
+        }
+    }
+
+    &-collection-status {
+        &:after {
+            background-image: url("../assets/images/action-taken/collection-status.svg") !important;
+        }
+    }
+
+    &-penalty-waiver {
+        &:after {
+            background-image: url("../assets/images/action-taken/penalty-waiver.svg") !important;
+        }
+    }
+
+    &-edit {
+        &-address {
+            &:after {
+                background-image: url("../assets/images/action-taken/address-edit.svg") !important;
+            }
+        }
+
+        &-customer-email {
+            &:after {
+                background-image: url("../assets/images/action-taken/email-edit.svg") !important;
+            }
+        }
+
+        &-contact {
+            &:after {
+                background-image: url("../assets/images/action-taken/contact-edit.svg") !important;
+            }
+        }
+
+        &-identity {
+            &:after {
+                background-image: url("../assets/images/action-taken/identity-edit.svg") !important;
+            }
+        }
+    }
+}
+
+.status {
+
+    &-partial,
+    &-kept,
+    &-broken {
+        &:before {
+            @include width-height(12px, 12px);
+            bottom: inherit !important;
+            border-radius: 100%;
+            left: inherit !important;
+            top: 10px !important;
+            right: -6px !important;
+            z-index: 9 !important;
+        }
+    }
+
+    &-partial {
+        &:before {
+            background: transparent no-repeat url("../assets/images/action-taken/arr-orange-status.svg") !important;
+        }
+    }
+
+    &-kept {
+        &:before {
+            background: transparent no-repeat url("../assets/images/action-taken/arr-green-status.svg") !important;
+        }
+    }
+
+    &-broken {
+        &:before {
+            background: transparent no-repeat url("../assets/images/action-taken/arr-red-status.svg") !important;
+        }
+    }
+}
+
+.form-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.tx-right {
+    text-align: right;
+}
+
+.tx-left {
+    text-align: left;
+}
+
+.tx-center {
+    text-align: center;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-image: none !important;
+    width: 30px;
+    height: 30px;
+    top: 50% !important;
+    margin-top: -15px !important;
+    position: absolute;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:before {
+        content: "";
+        padding: 8px;
+        box-shadow: 2px -2px 0 0 $slateGrey;
+        margin-top: -8px;
+        position: absolute;
+        top: 50%;
+        border-top-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+    }
+}
+
+.swiper-button-next {
+    right: -25px !important;
+
+    &:before {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        left: 0px;
+    }
+}
+
+.swiper-button-prev {
+    left: -21px !important;
+
+    &::before {
+        -webkit-transform: rotate(225deg);
+        transform: rotate(225deg);
+        right: 0px;
+    }
+}
+
+.swiper-button-disabled {
+    opacity: 0 !important;
+}
+
+.overlay {
+    .swiper-button-next {
+        display: none;
+    }
+}
+
+.main-container {
+    padding: 20px 30px;
+}
+
+.settings-tabel {
+    tr {
+        border-bottom: 1px solid $quartz;
+
+        &:last-child {
+            td {
+                border-bottom: none;
+            }
+        }
+    }
+
+    th {
+        background-color: $lavender;
+        border-top: 1px solid $quartz;
+        border-bottom: 1px solid $quartz;
+        color: $wildBlueYonder;
+        font-size: $font-size-ss;
+        position: relative;
+        padding-left: 30px;
+        padding-right: 30px;
+
+        input {
+            padding: 0;
+            height: 20px;
+        }
+
+        .sort-arrow-up,
+        .sort-arrow-down {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            margin-top: -3px;
+
+            &:before {
+                @include width-height(0px, 0px);
+                content: "";
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+            }
+        }
+
+        .sort-arrow-up {
+            &:before {
+                @include position(absolute, $top: -5px, $right: 0);
+                border-bottom: 5px solid $wildBlueYonder;
+            }
+        }
+
+        .sort-arrow-down {
+            &:before {
+                @include position(absolute, $top: 5px, $right: 0);
+                border-top: 5px solid $wildBlueYonder;
+            }
+        }
+
+        &:first-child {
+            width: 50px;
+            padding: 11px 0px 11px 15px;
+            vertical-align: top;
+        }
+    }
+
+    td {
+        color: $regalBlue;
+        font-size: $font-size-ss;
+        padding-left: 30px;
+        vertical-align: top;
+        word-break: break-all;
+        line-height: 14px;
+        max-width: 150px;
+
+        &:first-child {
+            padding-left: 15px;
+
+            span {
+                background-color: $medium-slate-blue;
+                border-radius: 4px;
+                color: $white;
+                padding: 5px;
+            }
+        }
+
+        &:last-child {
+            padding-right: 30px;
+        }
+    }
+}
+
+.check-box-block {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    @include width-height(20px, 20px);
+
+    &.with-label {
+        padding-left: 35px;
+        margin-bottom: 12px;
+        font-size: 22px;
+        line-height: 16px;
+        @include width-height(auto, auto);
+    }
+
+    input {
+        @include position(absolute, 0, null, null, 0);
+        @include width-height(20px, 20px);
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        background-color: $white !important;
+        @include position(absolute, 0, null, null, 0);
+        @include width-height(20px, 20px);
+        @include border-radius(5px);
+        border: solid 1px $rockBlue;
+    }
+
+    input:checked~.checkmark {
+        background-color: $hoverBg !important;
+        border: solid 1px $hoverBg;
+    }
+
+    input:checked~.checkmark:after {
+        display: block;
+    }
+
+    input~.checkmark:after {
+        display: none;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        @include width-height(5px, 8px);
+        border: solid $white;
+        border-width: 0px 2px 2px 0px;
+        transform: rotate(45deg);
+    }
+}
+
+.selected-items {
+    li {
+        position: relative;
+
+        &:before {
+            content: "";
+            background-image: url("../assets/images/close.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            @include position(absolute, 13px, 5px, null, null);
+            @include width-height(10px, 10px);
+        }
+
+        .nsdicon-close {
+            display: none;
+        }
+    }
+}
+
+.next-button {
+    display: block;
+    text-align: right;
+    overflow: hidden;
+
+    &-role {
+        text-align: right;
+
+        .back {
+            float: left;
+        }
+
+        .back-button {
+            cursor: pointer;
+            display: inline;
+            position: relative;
+            right: 20px;
+        }
+    }
+}
+
+.save-btn {
+    background-color: $hoverBg;
+    border: none;
+    color: $white;
+    @include width-height(75px, 30px);
+    cursor: pointer;
+    font-size: $font-size-sm;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    letter-spacing: 1px;
+}
+
+.edit-blk {
+    float: right;
+    padding-top: 9px;
+
+    span {
+        border-right: 2px solid $boderColor;
+        padding: 0 18px;
+        display: inline-block;
+        vertical-align: top;
+        overflow: hidden;
+
+        &:last-child {
+            border: none;
+        }
+
+        &.disable {
+            pointer-events: none;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &.enable {
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        img {
+            vertical-align: top;
+        }
+    }
+}
+
+#toolbar #buttons {
+    display: none;
+}
+
+.email-template {
+
+    table,
+    td {
+        border: 1px solid $echo-blue;
+    }
+}
+
+.envi-status {
+    @include position(absolute, null, null, 0, 0);
+    font-size: $font-size-xs;
+    color: $white;
+    line-height: $font-size-xs;
+    padding: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    font-family: $font-family-regular;
+}
+
+.envi-status-prod {
+    @extend .envi-status;
+    background-color: $green;
+}
+
+.envi-status-dev {
+    @extend .envi-status;
+    background-color: $torchRed;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.reading-label {
+    margin-top: -20px;
+}
+
+.no-access {
+    font-size: $font-size-mm;
+    font-family: $font-family-medium;
+    text-align: center;
+
+    p {
+        padding-bottom: 0;
+    }
+}
+
+.response {
+    @include position(fixed, 10px, null, null, 0);
+    z-index: 99;
+    width: 100%;
+    text-align: center;
+
+    &-msg {
+        background-color: $mountain-meadow;
+        color: $white;
+        padding: 10px;
+        display: inline-block;
+
+        span {
+            display: inline-block;
+            padding: 0 5px;
+            font-size: $font-size-ss;
+        }
+    }
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.gm-ui-hover-effect {
+    display: none !important;
+}
+
+.gm-style-iw-c {
+    padding: 0 !important;
+    word-wrap: break-word;
+    overflow: hidden;
+    width: 110px;
+}
+
+.gm-style-iw-t {
+    z-index: 3;
+
+    &::after {
+        background: $light-slate-blue-c !important;
+        z-index: -1 !important;
+    }
+}
+
+.loc-tracker {
+    @include display-flex();
+
+
+    &__col {
+        @include flex(0 0 85%);
+        max-width: 80%;
+        font-weight: $font-family-medium;
+
+        &:not(:first-child) {
+            padding: 5px;
+        }
+
+        &:first-child {
+            @include display-flex();
+            @include flex(0 0 15%);
+            @include justify-content(center);
+            @include align-items(center);
+            max-width: 20%;
+            // background-color: red;
+            color: $white;
+        }
+
+        p {
+            font-size: 0.8em;
+            line-height: 14px;
+            padding: 0;
+            font-weight: $font-family-medium;
+        }
+    }
+}
+
+// .map {
+//     display: flex;
+//     flex-direction: row;
+//     width: 100%;
+//     width: 100%;
+//     align-items: center;
+// }
+
+.gm-style-iw-d {
+    overflow: hidden !important;
+}
+
+.map-content {
+    &.to-col {
+        @include display-flex;
+        @include flex-wrap(wrap);
+        margin: 0 -5px;
+
+        .map-col {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2) {
+                @include flex(0 0 50%);
+                max-width: 50%;
+            }
+
+            @include flex(0 0 100%);
+            max-width: 100%;
+            padding: 0 5px;
+        }
+    }
+
+    font-family: $font-family-regular !important;
+    padding: 10px;
+
+    h6 {
+        color: $lemon;
+    }
+
+    p {
+        color: $white;
+        padding-bottom: 5px;
+    }
+}
+
+.poi-info-window div,
+.poi-info-window a {
+    background-image: linear-gradient(152deg, $medium-slate-blue, $commentsPopupGradient);
+    background-color: transparent !important;
+    padding: 10px;
+    color: $white !important;
+}
+
+.mp-close {
+    @include position(absolute, $top: 15px, $right: 15px);
+    cursor: pointer;
+    width: 15px;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.map-label {
+    background-color: $touchRed;
+    border-radius: 50%;
+    @include width-height(15px, 15px);
+    text-align: center;
+    line-height: 15px;
+}
+
+.map-label-route {
+    background-color: $cerulean-blue;
+    border-radius: 50%;
+    @include width-height(15px, 15px);
+    text-align: center;
+    line-height: 15px;
+}
+
+.switch {
+    border: 1px solid transparent !important;
+}
+
+@media screen and (min-width:1367px) {
+    .main {
+        &-wrap {
+            &:before {
+                @include position(absolute, 0, null, null, 50%);
+                @include width-height(100%, 100%);
+                background-color: $white;
+                content: "";
+                max-width: 1366px;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .is-mobile {
+        display: none;
+    }
+
+    .mCS-dark .mCSB_container {
+        margin-right: 17px;
+    }
+
+    .theme-green:before {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 940px) {
+    body {
+        padding-top: 0;
+    }
+
+    .main {
+        &-wrap {
+            @include flex-direction(column-reverse);
+            overflow: hidden;
+            height: calc(100vh - 60px);
+        }
+
+        &-content {
+            &.is-overview {
+                padding-left: 0;
+            }
+
+            height: 100%;
+            padding-left: 0;
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            &:before {
+                display: none;
+            }
+        }
+    }
+
+    .progress {
+        .tool-tip {
+            @include border-radius(5px);
+            width: inherit;
+            left: 5px;
+            right: 5px;
+            transform: inherit;
+        }
+    }
+
+    .envi-status {
+        display: none;
+    }
+
+    .calandar-col {
+        .bs-datepicker-inline {
+            @include width-height(45px, 45px);
+            line-height: 45px;
+        }
+    }
+}
